@@ -1,9 +1,11 @@
-import type { VerificationStatus as Status } from "@/lib/types";
-import { BadgeCheck, CircleHelp, Clock3 } from "lucide-react";
+import type { SourceStatus, VerificationStatus as Status } from "@/lib/types";
+import { BadgeCheck, CircleHelp, Clock3, TriangleAlert, WifiOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+type AnyStatus = Status | SourceStatus;
+
 const STATUS_CONFIG: Record<
-  Status,
+  AnyStatus,
   { label: string; className: string; Icon: typeof BadgeCheck }
 > = {
   verified: {
@@ -18,6 +20,16 @@ const STATUS_CONFIG: Record<
       "bg-to-confirm-background text-to-confirm border-to-confirm/30",
     Icon: CircleHelp,
   },
+  outdated: {
+    label: "Périmé",
+    className: "bg-destructive/10 text-destructive border-destructive/25",
+    Icon: TriangleAlert,
+  },
+  unavailable: {
+    label: "Source inaccessible",
+    className: "bg-destructive/10 text-destructive border-destructive/25",
+    Icon: WifiOff,
+  },
   pending: {
     label: "À rédiger",
     className: "bg-secondary text-muted-foreground border-border",
@@ -26,15 +38,16 @@ const STATUS_CONFIG: Record<
 };
 
 interface VerificationStatusProps {
-  status: Status;
+  status: AnyStatus;
   /** Permet de masquer le libellé et ne conserver que l'icône. */
   compact?: boolean;
   className?: string;
 }
 
 /**
- * Étiquette de statut d'un contenu :
- * « Vérifié » (vert), « À confirmer » (ambre), « À rédiger » (neutre).
+ * Étiquette de statut d'un contenu ou d'une source :
+ * « Vérifié » (vert), « À confirmer » (ambre), « Périmé » et
+ * « Source inaccessible » (rouge), « À rédiger » (neutre).
  */
 export function VerificationStatus({
   status,

@@ -33,11 +33,14 @@ export default function LegalReferencesPage() {
       />
 
       <div className="mt-8 space-y-10">
-        <Notice variant="info" title="Deux statuts, deux niveaux de confiance">
-          « Vérifié » signifie que le texte a été consulté. « À confirmer »
-          signifie que la référence a été repérée mais que le texte n&apos;a pas
-          encore été lu intégralement&nbsp;: aucune affirmation détaillée ne
-          s&apos;appuiera dessus en l&apos;état.
+        <Notice variant="info" title="Quatre statuts, quatre niveaux de confiance">
+          « Vérifié » signifie que le texte a été consulté dans une source
+          officielle primaire. « À confirmer » signifie que la référence a été
+          repérée sans consultation du texte officiel. « Périmé » signifie que
+          le texte a été modifié ou que sa validité n&apos;est plus assurée en
+          l&apos;état. « Source inaccessible » signifie que la source n&apos;a
+          pas pu être jointe. Aucune affirmation détaillée ne s&apos;appuiera
+          sur un statut autre que « Vérifié ».
         </Notice>
 
         {areas.map((area) => {
@@ -57,14 +60,24 @@ export default function LegalReferencesPage() {
                       <LegalReference
                         title={ref.title}
                         detail={ref.detail}
+                        publication={ref.publication}
                         url={ref.url}
+                        documentRef={ref.documentRef}
                         className="border-0 bg-transparent p-0"
                       />
+                      {ref.amendments && (
+                        <p className="text-xs text-destructive">
+                          Modification connue : {ref.amendments}
+                        </p>
+                      )}
                       {ref.note && (
                         <p className="text-xs text-muted-foreground">
                           {ref.note}
                         </p>
                       )}
+                      <p className="text-xs text-muted-foreground">
+                        Vérifié le {ref.lastVerifiedAt}
+                      </p>
                     </div>
                     <VerificationStatus
                       status={ref.status}

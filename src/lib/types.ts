@@ -16,6 +16,28 @@ export type VerificationStatus =
   | "to-confirm" // Information issue d'une recherche non finalisée
   | "pending"; // Contenu à rédiger
 
+/**
+ * Statut de vérification d'une source officielle ou d'une référence juridique.
+ *
+ * - `verified` : information confirmée sur une source primaire accessible ;
+ * - `to-confirm` : source ou information non confirmée de façon indépendante ;
+ * - `outdated` : information dont la validité n'est plus assurée (texte
+ *   modifié, tarif périmé…) ;
+ * - `unavailable` : source officielle injoignable au moment de la vérification.
+ */
+export type SourceStatus =
+  | "verified"
+  | "to-confirm"
+  | "outdated"
+  | "unavailable";
+
+/** Catégorie d'une source officielle. */
+export type SourceCategory =
+  | "legal-text" // publications officielles : JORT, codes, Imprimerie Officielle
+  | "administration" // administrations et organismes publics
+  | "portal" // portails officiels thématiques
+  | "support"; // source secondaire, jamais substitut d'un texte officiel
+
 /** Nature d'une exigence affichée. */
 export type RequirementKind = "obligation" | "recommendation";
 

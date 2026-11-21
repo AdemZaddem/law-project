@@ -5,18 +5,26 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { PageHeader } from "@/components/page-header";
 import { SectionHeading } from "@/components/section-heading";
 import { Notice } from "@/components/notice";
+import { VerificationStatus } from "@/components/verification-status";
 import { OFFICIAL_SOURCES, SOURCES_VERIFIED_AT } from "@/lib/sources";
 
 export const metadata: Metadata = {
   title: "Sources officielles",
   description:
-    "La liste des sites officiels utilisés pour vérifier les informations du guide, avec leur statut d'accès.",
+    "La liste des sites officiels utilisés pour vérifier les informations du guide, avec leur statut de vérification et d'accès.",
 };
 
 const ACCESS_LABEL = {
   accessible: "Consulté",
   partial: "Consulté partiellement",
-  inaccessible: "Non accessible au moment de la vérification",
+  unavailable: "Non accessible lors de la vérification",
+} as const;
+
+const CATEGORY_LABEL = {
+  "legal-text": "Texte officiel",
+  administration: "Administration",
+  portal: "Portail officiel",
+  support: "Source secondaire",
 } as const;
 
 export default function SourcesPage() {
@@ -26,17 +34,21 @@ export default function SourcesPage() {
       <PageHeader
         pillar="Ressources"
         title="Sources officielles"
-        intro="La crédibilité du guide repose sur ses sources. Voici celles qui ont été consultées, avec leur statut d'accès réel."
+        intro="La crédibilité du guide repose sur ses sources. Voici celles qui ont été auditées, avec leur statut de vérification et leur statut d'accès réel."
         status="verified"
         lastVerifiedAt={SOURCES_VERIFIED_AT}
       />
 
       <div className="mt-8 space-y-6">
         <Notice variant="info" title="Comment lire ce registre">
-          « Consulté » signifie que la page a été effectivement ouverte et
-          vérifiée à la date indiquée. Un accès « partiel » ou « non
-          accessible » signifie que l&apos;information a été relevée autrement
-          et doit être revérifiée avant publication.
+          Le <strong>statut de vérification</strong> indique le niveau atteint
+          pour les informations puisées dans la source : « Vérifié » (source
+          primaire consultée), « À confirmer » (non confirmée de façon
+          indépendante), « Périmé » (validité incertaine) ou « Source
+          inaccessible ». Le <strong>statut d&apos;accès</strong> indique si le
+          site a effectivement répondu lors de la dernière vérification. Une
+          source injoignable reste listée&nbsp;: elle n&apos;est jamais retirée
+          du registre.
         </Notice>
 
         <section aria-labelledby="sources-titre">
@@ -54,10 +66,21 @@ export default function SourcesPage() {
                       {source.domain}
                     </p>
                   </div>
-                  <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
-                    {ACCESS_LABEL[source.accessStatus]}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <VerificationStatus status={source.status} />
+                    <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+                      {ACCESS_LABEL[source.accessStatus]}
+                    </span>
+                  </div>
                 </div>
+
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                  <span className="rounded-full border border-border px-2 py-0.5">
+                    {CATEGORY_LABEL[source.category]}
+                  </span>
+                  <span>Vérifié le {source.lastVerifiedAt}</span>
+                </div>
+
                 <a
                   href={source.url}
                   target="_blank"
@@ -68,6 +91,12 @@ export default function SourcesPage() {
                   <ExternalLink aria-hidden className="size-3.5" />
                   <span className="sr-only">site officiel, nouvel onglet</span>
                 </a>
+
+                {source.notes && (
+                  <p className="mt-3 border-t border-border pt-3 text-xs leading-relaxed text-muted-foreground">
+                    {source.notes}
+                  </p>
+                )}
               </li>
             ))}
           </ul>

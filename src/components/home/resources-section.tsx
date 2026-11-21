@@ -1,20 +1,16 @@
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
-import type { OfficialSource } from "@/lib/types";
+import { OFFICIAL_SOURCES } from "@/lib/sources";
 
 /**
- * Sites officiels référencés.
+ * Sites officiels référencés, dérivés du registre unique `sources.ts`
+ * (sources primaires uniquement ; les sources secondaires sont exclues).
  * Aucun logo institutionnel n'est reproduit : uniquement des liens textuels.
  */
-const OFFICIAL_SOURCES: readonly OfficialSource[] = [
-  { label: "Registre National des Entreprises", url: "https://home.registre-entreprises.tn/" },
-  { label: "APII — Guichet unique", url: "https://www.tunisieindustrie.nat.tn/" },
-  { label: "Ministère des Finances — Fiscalité", url: "https://www.finances.gov.tn/" },
-  { label: "CNSS", url: "https://www.cnss.tn/" },
-  { label: "Startup Tunisia", url: "https://startup.gov.tn/fr" },
-  { label: "INNORPI", url: "https://www.innorpi.tn/" },
-];
+const OFFICIAL_LINKS = OFFICIAL_SOURCES.filter(
+  (source) => source.category !== "support",
+);
 
 /** Section « Ressources officielles » : liens sortants explicites. */
 export function ResourcesSection() {
@@ -31,7 +27,7 @@ export function ResourcesSection() {
         />
 
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {OFFICIAL_SOURCES.map((source) => (
+          {OFFICIAL_LINKS.map((source) => (
             <li key={source.url}>
               <a
                 href={source.url}

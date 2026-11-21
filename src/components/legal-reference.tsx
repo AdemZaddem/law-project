@@ -6,8 +6,12 @@ interface LegalReferenceProps {
   title: string;
   /** Précision optionnelle (article, décret associé…). */
   detail?: string;
+  /** Référence de publication, le cas échéant (ex. « JORT n° 89 du 7 novembre 2000 »). */
+  publication?: string;
   /** URL du texte officiel, le cas échéant. */
   url?: string;
+  /** Référence documentaire hors ligne, à défaut d'URL officielle. */
+  documentRef?: string;
   className?: string;
 }
 
@@ -18,7 +22,9 @@ interface LegalReferenceProps {
 export function LegalReference({
   title,
   detail,
+  publication,
   url,
+  documentRef,
   className,
 }: LegalReferenceProps) {
   const content = (
@@ -31,6 +37,16 @@ export function LegalReference({
         {detail && (
           <span className="mt-0.5 block text-xs text-muted-foreground">
             {detail}
+          </span>
+        )}
+        {publication && (
+          <span className="mt-0.5 block text-xs text-muted-foreground">
+            {publication}
+          </span>
+        )}
+        {!url && documentRef && (
+          <span className="mt-0.5 block text-xs text-muted-foreground">
+            {documentRef}
           </span>
         )}
       </span>

@@ -40,6 +40,8 @@ src/
 │   ├── home/             # sections de la page d'accueil
 │   └── ui/               # composants shadcn/ui
 └── lib/                  # types, navigation, registre des sources
+docs/
+└── content-verification.md   # politique de vérification des contenus juridiques
 ```
 
 ## Règles de contenu
@@ -48,6 +50,10 @@ src/
 - Les informations non établies sont marquées **« À confirmer »**.
 - Les montants de capital non vérifiés sont **masqués**.
 - Aucune affiliation gouvernementale n'est suggérée.
+- La vérification suit la politique décrite dans
+  [`docs/content-verification.md`](docs/content-verification.md) : sources
+  primaires uniquement, quatre statuts (`verified`, `to-confirm`, `outdated`,
+  `unavailable`), et aucune affirmation sans source traçable.
 
 ## Document de référence
 
