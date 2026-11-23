@@ -40,7 +40,7 @@ export const OFFICIAL_SOURCES: readonly SourceEntry[] = [
     accessStatus: "accessible",
     lastVerifiedAt: SOURCES_VERIFIED_AT,
     notes:
-      "Site institutionnel consulté (accueil, rubrique formalités, services en ligne). Aucune donnée de procédure n'en est encore extraite : les pages du parcours resteront « À confirmer » jusqu'à cette extraction.",
+      "Site institutionnel consulté (accueil, rubrique formalités, services en ligne). La rubrique « Formalités » a été extraite le 21 novembre 2026 : redevances et délais de dépôt des formalités de création revérifiés. Ils sont présentés sur le guide comme « indiqués par le RNE au 21 novembre 2026 » — publication administrative, pas un tarif législatif permanent — et comme délais de dépôt, pas délais de traitement.",
   },
   {
     label: "APII — Agence de Promotion de l'Industrie et de l'Innovation",
@@ -124,7 +124,7 @@ export const OFFICIAL_SOURCES: readonly SourceEntry[] = [
     accessStatus: "accessible",
     lastVerifiedAt: SOURCES_VERIFIED_AT,
     notes:
-      "Édition officielle du code des sociétés commerciales (mise à jour au 10 février 2022) consultée dans son intégralité via le site du CMF qui l'héberge.",
+      "Éditions officielles du code des sociétés commerciales consultées : mise à jour du 10 février 2022 (PDF hébergé par le CMF) et mise à jour du 7 février 2024, dernière édition trouvée au 21 novembre 2026.",
   },
   {
     label: "Conseil du Marché Financier (hébergeur de l'édition officielle)",
@@ -193,10 +193,10 @@ export const LEGAL_REFERENCES: readonly LegalReferenceEntry[] = [
     url: "https://www.cmf.tn/sites/default/files/pdfs/reglementation/textes-reference/code_societes_fr.pdf",
     area: "creation",
     status: "verified",
-    lastVerifiedAt: SOURCES_VERIFIED_AT,
-    note: "Texte consulté dans l'édition officielle de l'Imprimerie Officielle (mise à jour du 10 février 2022). Les montants et seuils chiffrés restent masqués jusqu'à vérification sur le texte en vigueur.",
+    lastVerifiedAt: "22 novembre 2026",
+    note: "Texte consulté dans deux éditions officielles de l'Imprimerie Officielle : mise à jour du 10 février 2022 (PDF hébergé par le CMF) et mise à jour du 7 février 2024, dernière édition trouvée. Les montants et seuils chiffrés publiés par le guide (capital de la SA, seuils du commissaire aux comptes) ont été vérifiés lors de l'audit des 21 et 22 novembre 2026.",
     amendments:
-      "L'édition consultée est révisée au 10 février 2022 : les modifications postérieures du code doivent être recherchées avant publication de tout détail chiffré.",
+      "L'édition du 7 février 2024 est la plus récente trouvée au 21 novembre 2026 : aucune loi modificative trouvée entre le 07/02/2024 et le 21/11/2026 (recherches JORT, iort.tn, cmf.tn, diwan.tn). L'absence de preuve n'est pas une preuve d'absence : contrôle périodique maintenu.",
   },
   {
     title: "Loi n° 2018-52 du 29 octobre 2018",
@@ -208,6 +208,38 @@ export const LEGAL_REFERENCES: readonly LegalReferenceEntry[] = [
     note: "Titre, numéro et date confirmés sur plusieurs bases de texte ; la référence de publication provient d'une archive indépendante du JORT, le PDF officiel n'ayant pas été consulté.",
     amendments:
       "Signalée modifiée par la loi n° 2020-30 du 30 juin 2020 (source secondaire) : à confirmer sur le texte officiel.",
+  },
+  {
+    title: "Loi n° 89-114 du 30 décembre 1989",
+    detail:
+      "Code de l'impôt sur le revenu des personnes physiques et de l'impôt sur les sociétés — édition 2026",
+    url: "https://jibaya.tn/wp-content/uploads/2026/03/Code_IRPP_IS_2026_fr.pdf",
+    area: "creation",
+    status: "verified",
+    lastVerifiedAt: "22 novembre 2026",
+    note: "Édition 2026 publiée par le portail officiel de l'administration fiscale (jibaya.tn) : elle incorpore les lois de finances jusqu'à la LF 2026 (loi n° 2025-17 du 12 décembre 2025). Cette édition ne contient pas la partie « loi de promulgation » de la loi n° 89-114 (art. 12 et 12 bis : IS minimum), qui se lit dans les compilations de l'Imprimerie Officielle.",
+  },
+  {
+    title: "Loi n° 2024-48 du 9 décembre 2024",
+    detail:
+      "Loi de finances pour 2025 — barème de l'IRPP (art. 36) et taux de l'IS (art. 37)",
+    publication: "JORT n° 149 du 10 décembre 2024",
+    url: "https://jibaya.tn/wp-content/uploads/2024/12/Loi2024_48.pdf",
+    area: "creation",
+    status: "verified",
+    lastVerifiedAt: "22 novembre 2026",
+    note: "PDF du Journal Officiel hébergé par le portail fiscal. Barème applicable aux revenus réalisés à partir du 01/01/2025 (art. 36-2) ; IS à 20 % applicable aux bénéfices réalisés à partir du 01/01/2024 (note (2) de l'art. 49 du code).",
+  },
+  {
+    title: "Loi n° 2025-17 du 12 décembre 2025",
+    detail:
+      "Loi de finances pour 2026 — contribution sociale de solidarité (art. 87)",
+    documentRef:
+      "Texte incorporé au Code IRPP/IS 2026 (jibaya.tn) ; commentaire de la DGI : Note commune N°01/2026",
+    area: "creation",
+    status: "verified",
+    lastVerifiedAt: "22 novembre 2026",
+    note: "Mesure exceptionnelle annuelle : les taux et minimums de la contribution sociale de solidarité pour 2026 doivent être revérifiés chaque année.",
   },
   {
     title:
